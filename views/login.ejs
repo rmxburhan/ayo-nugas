@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form Design</title>
+    <link rel="stylesheet" href="/styles/style-login.css" />
+  </head>
+  <body>
+      <div class="login-box">
+        <img src="/img/logo-1.png" alt="" width="75" style="display: block; margin-left: auto; margin-right: auto; position: absolute; transform: translate(65%, -65%);">
+        <h1 style="margin-top: 50px">Login Here</h1>
+        <form action="/login" method="POST">
+          <input type="text" name="username" id="username" placeholder="Enter Username" required/>
+          <input type="password" name="password" id="password" placeholder="Enter Password" required />
+          <input type="Submit" name="Submit" value="Login" />
+        </form>
+        <% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error.msg %>
+          </div>
+          <% }); %> <% } %> <% if(success_msg != ''){ %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= success_msg %>
+          </div>
+          <% } %> <% if(error_msg != ''){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error_msg %>
+          </div>
+          <% } %> <% if(error != ''){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error %>
+          </div>
+          <% } %>
+      </div>
+  </body>
+</html>

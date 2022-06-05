@@ -1,0 +1,71 @@
+body {
+    margin-bottom: 0px;
+    padding: 0px;
+    background-image: url("/img/gelombang-putih.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+    height: 100px;
+  }
+  .login-box {
+    width: 320px;
+    height: 420px;
+    background: #fff;
+    color: black;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px rgb(177, 176, 176);
+    padding: 70px;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    margin-top: 0px;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+  }
+  .login-box p {
+    margin-bottom: 0px;
+    padding: 0px;
+    font-weight: bold;
+  }
+  .login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .login-box input[type="text"],
+  input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: trasparent;
+    outline: none;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+  }
+  .login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    background: #1c8abadb;
+  }
+  /* .login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: aquamarine;
+    color: #fff;
+  } */
+  .login-box a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #000;
+  }
+  .login-box a:hover {
+    color: red;
+  }
+  

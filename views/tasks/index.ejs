@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+    href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/styles/style-dashboard.css" />
+    <title>Task management app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+  </head>
+  <body>
+    <%- include('../layouts/sidebar') %> 
+
+
+    <!-- CONTENT -->
+    <section id="content">
+      <%- include('../layouts/navbar') %> 
+
+
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1><%= title %></h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#"></a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li>
+                <a class="active" href="#"><%= title %></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Tasks list</h3>
+            </div>
+            <button id="add-user"><a href="/tasks/add">[+] add task</a></button>
+            <table>
+                <% if (tasks != '') { %>
+                    <tablec class="table-responsive">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% tasks.forEach((row, index) => { %>
+                                <tr class="align-middle">
+                                    <td><%= index + 1 %></td>
+                                    <td><%= row.title %></td>
+                                    <td><%= row.description %></td>
+                                    <td><%= row.date.toISOString().split('T')[0] %></td>
+                                    <% if (row.status == 0) { %>
+                                        <td><span class="status pending">Pending</span></td>
+                                    <% } else   if (row.status == 1) {%>
+                                        <td><span class="status completed">Completed</span></td>
+                                    <% } %> 
+                                    <td style="display: flex">
+                                        <form method="GET" action="/tasks/<%= row.id %>"><button type="submit" style="background-color: rgb(45, 135, 238); border: 0; padding: 10px 10px; color: white; margin-right: 10px; border-radius: 5px;"><i class="fas fa-edit fa-lg mx-1"></i></button></form>
+                                        <% if (row.date.toISOString().split("T")[0] >= new Date().toISOString().split('T')[0]) {%> 
+                                        <form method="POST" action="/tasks/delete/<%= row._id %>">
+                                        <button href="" type="submit" style="background-color: rgb(238, 45, 45); border: 0; padding: 10px 10px; color: white; margin-right: 10px; border-radius: 5px;"><i class="fas fa-trash fa-lg mx-1"></i></button></form>
+                                        <% } %> 
+                                        <% if (row.date.toISOString().split("T")[0] == new Date().toISOString().split('T')[0]) {%> 
+                                        <% if (row.status == 0) { %>
+                                          <form method="POST" action="/tasks/update/status/<%= row._id %>">
+                                          <button href="" type="submit" style="background-color: rgb(60, 175, 37); border: 0; padding: 10px 10px; color: white; margin-right: 10px; border-radius: 5px;"><i class="fas fa-check fa-lg mx-1"></i></button></form>
+                                        <% } else  if (row.status == 1) {%>
+                                          <form method="POST" action="/tasks/reactive/status/<%= row._id %>">
+                                          <button href="" type="submit" style="background-color: rgb(60, 175, 37); border: 0; padding: 10px 10px; color: white; margin-right: 10px; border-radius: 5px;"><i class="fas fa-refresh fa-lg mx-1"></i></button></form>
+                                        <% } %>
+                                        <% } %> 
+                                    </td>
+                                </tr>
+                               <% }) %>
+                        </tbody>
+                    </table>
+                <% } else {%>
+                    <h1 class="text-center text-secondary mt-5">No tasks found in database</h1>
+                <% } %> 
+            </table>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+    <script src="/js/main-dashboard.js" ></script>
+<%- include('../layouts/footer') %>
